@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifeman — Мережа спортивних залів</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-black: #0d0d0d;
+            --bg-dark-gray: #1a1a1a;
+            --bg-light-gray: #2d2d2d;
+            --primary-red: #e60000;
+            --accent-red: #ff3333;
+            --text-white: #ffffff;
+            --text-gray: #b3b3b3;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Шапка сайту (Header) */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(13, 13, 13, 0.95);
+            border-bottom: 2px solid var(--primary-red);
+            z-index: 1000;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-white);
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        nav a {
+            color: var(--text-white);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--primary-red);
+        }
+
+        .btn-header {
+            background-color: var(--primary-red);
+            color: var(--text-white);
+            border: none;
+            padding: 12px 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 0 15px rgba(230, 0, 0, 0.4);
+            transition: var(--transition);
+        }
+
+        .btn-header:hover {
+            background-color: var(--accent-red);
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(230, 0, 0, 0.8);
+        }
+
+        /* Головний екран (Hero) */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(13,13,13,1)), url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=1920') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            padding-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        .hero h1 span {
+            color: var(--primary-red);
+            text-shadow: 0 0 15px rgba(230, 0, 0, 0.5);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin-bottom: 40px;
+            color: var(--text-gray);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .btn-large {
+            background-color: transparent;
+            color: var(--text-white);
+            border: 3px solid var(--primary-red);
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .btn-large:hover {
+            background-color: var(--primary-red);
+            box-shadow: 0 0 30px var(--primary-red);
+            transform: translateY(-3px);
+        }
+
+        /* Секція Про нас */
+        .about {
+            padding: 100px 50px;
+            background-color: var(--bg-dark-gray);
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 5px;
+            background-color: var(--primary-red);
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 20px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat-card {
+            background-color: var(--bg-light-gray);
+            padding: 25px;
+            border-left: 4px solid var(--primary-red);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            margin-bottom: 5px;
+        }
+
+        /* Секція Переваги та Послуги */
+        .features {
+            padding: 100px 50px;
+            background-color: var(--bg-black);
+            text-align: center;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 50px auto 0 auto;
+        }
+
+        .feature-card {
+            background-color: var(--bg-dark-gray);
+            padding: 40px 30px;
+            border: 1px solid #222;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-red);
+            box-shadow: 0 10px 30px rgba(230,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: var(--text-white);
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .feature-badge {
+            background-color: var(--primary-red);
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            transform: rotate(45deg);
+            width: 120px;
+            text-align: center;
+        }
+
+        /* Інтерактивний Квіз */
+        .quiz-section {
+            padding: 100px 50px;
+            background: linear-gradient(rgba(26,26,26,0.95), rgba(26,26,26,0.95)), url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=1920') center center/cover;
+            text-align: center;
+        }
+
+        .quiz-container {
+            max-width: 700px;
+            margin: 40px auto 0 auto;
+            background-color: var(--bg-black);
+            padding: 50px;
+            border: 2px solid var(--primary-red);
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(230,0,0,0.2);
+        }
+
+        .quiz-step {
+            display: none;
+        }
+
+        .quiz-step.active {
+            display: block;
+        }
+
+        .quiz-question {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .quiz-option {
+            background-color: var(--bg-light-gray);
+            padding: 18px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--transition);
+            text-align: left;
+        }
+
+        .quiz-option:hover {
+            background-color: var(--primary-red);
+            color: white;
+            border-color: var(--primary-red);
+        }
+
+        .quiz-form input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: var(--bg-light-gray);
+            border: 1px solid #444;
+            color: white;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        .quiz-form input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+
+        .btn-quiz-submit {
+            background-color: var(--primary-red);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-quiz-submit:hover {
+            background-color: var(--accent-red);
+        }
+
+        /* Модальне вікно (Trial Form) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: var(--bg-dark-gray);
+            border: 3px solid var(--primary-red);
+            padding: 50px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            color: var(--primary-red);
+        }
+
+        .modal h2 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: var(--bg-light-gray);
+            border: 1px solid #444;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .modal input:focus {
+            outline: none;
+            border-color: var(--primary-red);
+        }
+
+        /* Підвал (Footer) */
+        footer {
+            background-color: #050505;
+            padding: 60px 50px;
+            border-top: 1px solid #222;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-weight: 900;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo span {
+            color: var(--primary-red);
+        }
+
+        .btn-telegram {
+            display: inline-flex;
+            align-items: center;
+            background-color: #0088cc;
+            color: white;
+            text-decoration: none;
+            padding: 15px 35px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            border-radius: 50px;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(0, 136, 204, 0.4);
+            transition: var(--transition);
+        }
+
+        .btn-telegram:hover {
+            background-color: #00a2f2;
+            transform: scale(1.05);
+            box-shadow: 0 5px 30px rgba(0, 136, 204, 0.7);
+        }
+
+        .footer-copy {
+            margin-top: 40px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивність */
+        @media (max-width: 900px) {
+            header { padding: 15px 20px; }
+            nav { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .about { flex-direction: column; padding: 60px 20px; }
+            .features { padding: 60px 20px; }
+            .quiz-section { padding: 60px 20px; }
+            .quiz-container { padding: 30px 20px; }
+            .section-title { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Rife<span>man</span></div>
+        <nav>
+            <a href="#about">Про нас</a>
+            <a href="#features">Послуги</a>
+            <a href="#quiz">Підбір абонемента</a>
+        </nav>
+        <button class="btn-header" onclick="openModal()">Пробне тренування</button>
+    </header>
+
+    <section class="hero">
+        <h1>Rifeman — Тут кується твоя <span>найкраща форма</span></h1>
+        <p>Команда професіоналів та діючих спортсменів змінить твоє уявлення про фітнес</p>
+        <button class="btn-large" onclick="openModal()">Забрати безкоштовне тренування</button>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2 class="section-title">Ми — Професіонали</h2>
+            <p>Ми не просто тренери. Ми — команда діючих спортсменів, які присвятили своє життя залізному спорту та здоровому способу життя. Наш досвід дозволяє створювати методики, які дійсно працюють.</p>
+            <p>Вже сьогодні ми допомогли тисячам людей здобути ідеальну, саме для них, фізичну форму. Настав твій час змінити життя на краще.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>1000+</h3>
+                    <p>Задоволених клієнтів</p>
+                </div>
+                <div class="stat-card">
+                    <h3>100%</h3>
+                    <p>Гарантія результату</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <h2 class="section-title">Що на тебе чекає всередині</h2>
+        <div class="features-grid">
+            
+            <div class="feature-card">
+                <h3>Десятки тренажерів</h3>
+                <p>Сучасне професійне обладнання для пропрацювання будь-якої групи м'язів під будь-який рівень підготовки.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Залізо та турніки</h3>
+                <p>Велика зона вільних ваг, важкоатлетичні помости та функціональні комплекси з турніками для кросфіту й калістеніки.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Йога-спорт та Сауна</h3>
+                <p>Баланс сили та відновлення. Спеціальні класи з йоги для гнучкості та розслаблююча сауна після важкого тренування.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">ТОП</div>
+                <h3>Персональний тренер</h3>
+                <p>Індивідуальний спеціаліст, який створить для тебе покроковий план тренувань та збалансованого харчування.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-badge">БОНУС</div>
+                <h3>Сервіс на рецепції</h3>
+                <p>Кожен гість на рецепції гарантовано отримує чистий рушник та купон на 10 безкоштовних протеїнових коктейлів!</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="quiz" class="quiz-section">
+        <h2 class="section-title">Підбір абонемента за 1 хвилину</h2>
+        <p style="color: var(--text-gray); margin-bottom: 20px;">Пройди коротке опитування та отримай індивідуальну пропозицію зі знижкою!</p>
+        
+        <div class="quiz-container">
+            <div class="quiz-step active" id="step-1">
+                <div class="quiz-question">Яка ваша головна мета?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="nextStep(2)">Схуднення та рельєф</div>
+                    <div class="quiz-option" onclick="nextStep(2)">Набір м'язової маси</div>
+                    <div class="quiz-option" onclick="nextStep(2)">Підтримання форми та здоров'я</div>
+                </div>
+            </div>
+
+            <div class="quiz-step" id="step-2">
+                <div class="quiz-question">Який час для тренувань вам зручний?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="nextStep(3)">Ранковий (З 07:00 до 12:00)</div>
+                    <div class="quiz-option" onclick="nextStep(3)">Денний (З 12:00 до 17:00)</div>
+                    <div class="quiz-option" onclick="nextStep(3)">Вечірній (З 17:00 до 23:00)</div>
+                    <div class="quiz-option" onclick="nextStep(3)">Будь-коли (Вільний графік)</div>
+                </div>
+            </div>
+
+            <div class="quiz-step" id="step-3">
+                <div class="quiz-question">Чи потрібні вам додаткові зони (Сауна, Йога)?</div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="nextStep(4)">Так, обов'язково</div>
+                    <div class="quiz-option" onclick="nextStep(4)">Ні, лише тренажерний зал</div>
+                    <div class="quiz-option" onclick="nextStep(4)">Бажано, але не критично</div>
+                </div>
+            </div>
+
+            <div class="quiz-step" id="step-4">
+                <div class="quiz-question">Все готово! Куди надіслати розрахунок та знижку?</div>
+                <form class="quiz-form" onsubmit="submitQuiz(event)">
+                    <input type="text" placeholder="Ваше ім'я" required>
+                    <input type="tel" placeholder="Ваш номер телефону" required>
+                    <button type="submit" class="btn-quiz-submit">Отримати персональну пропозицію</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div id="trialModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2>Пробне тренування</h2>
+            <p>Залиште контакти, щоб забронювати перше заняття БЕЗКОШТОВНО!</p>
+            <form onsubmit="submitTrial(event)">
+                <input type="text" placeholder="Ваше ім'я" required>
+                <input type="tel" placeholder="Телефон" required>
+                <button type="submit" class="btn-quiz-submit">Записатись зараз</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-logo">Rife<span>man</span></div>
+        <p>Залишилися запитання або хочете обговорити індивідуальні умови співпраці? Напишіть нашому менеджеру.</p>
+        <a href="https://t.me/Alitta_30_96" target="_blank" class="btn-telegram">Зв'язатися у телеграм</a>
+        <div class="footer-copy">
+            &copy; 2026 Rifeman. Усі права захищено. Кована якість твого тіла.
+        </div>
+    </footer>
+
+    <script>
+        // Функції для модального вікна
+        function openModal() {
+            document.getElementById('trialModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('trialModal').classList.remove('active');
+        }
+
+        // Закриття модалки при кліку поза вікном
+        window.onclick = function(event) {
+            let modal = document.getElementById('trialModal');
+            if (event.target == modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // Логіка Квізу
+        function nextStep(stepNumber) {
+            // Ховаємо всі кроки
+            let steps = document.querySelectorAll('.quiz-step');
+            steps.forEach(step => step.classList.remove('active'));
+            
+            // Показуємо потрібний крок
+            document.getElementById('step-' + stepNumber).classList.add('active');
+        }
+
+        // Обробка відправки форм (демонстраційна логіка)
+        function submitQuiz(event) {
+            event.preventDefault();
+            alert('Дякуємо! Ваші відповіді збережено. Менеджер зв\'яжеться з вами найближчим часом та запропонує індивідуальну знижку.');
+            nextStep(1); // Скидаємо квіз на початок
+            event.target.reset();
+        }
+
+        function submitTrial(event) {
+            event.preventDefault();
+            alert('Вітаємо! Вас успішно записано на безкоштовне пробне тренування. Чекаємо на вас!');
+            closeModal();
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
